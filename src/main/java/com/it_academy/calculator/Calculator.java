@@ -1,39 +1,8 @@
 package com.it_academy.calculator;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
 public class Calculator {
 
-    private static double number;
-
     public Calculator() {
-    }
-
-    public static double userNumberInput() {
-        Scanner sc = new Scanner(System.in);
-        try {
-            number = Double.parseDouble(sc.nextLine());
-        } catch (NumberFormatException exception) {
-            System.out.println("Не было введено число, попробуйте ещё раз");
-            userNumberInput();
-        }
-        return number;
-    }
-
-    public static char userSignInput() {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            String userInput = sc.nextLine();
-            try {
-                if (userInput.toCharArray().length == 1 && Arrays.asList('+', '-', '*', '/').contains(userInput.charAt(0))) {
-                    return userInput.charAt(0);
-                }
-                System.out.println("Неправильный ввод, попробуйте ещё раз");
-            } catch (IndexOutOfBoundsException exception) {
-                System.out.println("Вы не ввели знак операции, попробуйте ещё раз");
-            }
-        }
     }
 
     public static double plus(double number1, double number2) {

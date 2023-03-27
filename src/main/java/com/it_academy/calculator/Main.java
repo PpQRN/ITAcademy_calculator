@@ -4,21 +4,60 @@ package com.it_academy.calculator;
 public class Main {
 
     public static void main(String[] args) {
+        Double number1 = null;
+        Double number2 = null;
+        Character sign = null;
         System.out.println("Введите первое число");
-        double number1 = Calculator.userNumberInput();
+        while (number1 == null) {
+            try {
+                String input = ConsoleInputConverter.getInput();
+                number1 = ConsoleInputConverter.convertInputToDouble(input);
+            } catch (NumberFormatException exception) {
+                System.out.println("Не было введено число, попробуйте ещё раз");
+            }
+        }
         System.out.println("Введите второе число");
-        double number2 = Calculator.userNumberInput();
+        while (number2 == null) {
+            try {
+                String input = ConsoleInputConverter.getInput();
+                number2 = ConsoleInputConverter.convertInputToDouble(input);
+            } catch (NumberFormatException exception) {
+                System.out.println("Не было введено число, попробуйте ещё раз");
+            }
+        }
         System.out.println("Введите действие, которое хотите совершить (доступные действия +,-,/,*)");
-        char sign = Calculator.userSignInput();
+        while (sign == null) {
+            try {
+                String input = ConsoleInputConverter.getInput();
+                sign = ConsoleInputConverter.convertInputToChar(input);
+            } catch (IllegalArgumentException exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
         try {
             double result = Calculator.calculate(number1, number2, sign);
             System.out.println(result);
         } catch (IllegalArgumentException | ArithmeticException exception) {
             System.out.println(exception.getMessage());
-        }
-        //Scanner sc = new Scanner(System.in);
-        //Calculator calculator = new Calculator();
-        //calculator.userNumberInput(sc.nextLine());
+
+
+//        System.out.println("Введите первое число");
+//        double number1 = Calculator.userNumberInput();
+//        System.out.println("Введите второе число");
+//        double number2 = Calculator.userNumberInput();
+//        System.out.println("Введите действие, которое хотите совершить (доступные действия +,-,/,*)");
+//        char sign = Calculator.userSignInput();
+//        try {
+//            double result = Calculator.calculate(number1, number2, sign);
+//            System.out.println(result);
+//        } catch (IllegalArgumentException | ArithmeticException exception) {
+//            System.out.println(exception.getMessage());
+//        }
+
+
+            //Scanner sc = new Scanner(System.in);
+            //Calculator calculator = new Calculator();
+            //calculator.userNumberInput(sc.nextLine());
 //        try {
 //            System.out.println("Введите первое число");
 //            double number1 = Calculator.userNumberInput();
@@ -33,5 +72,6 @@ public class Main {
 //        } catch (IllegalArgumentException | ArithmeticException exception) {
 //            System.out.println(exception.getMessage());
 //        }
+        }
     }
 }
