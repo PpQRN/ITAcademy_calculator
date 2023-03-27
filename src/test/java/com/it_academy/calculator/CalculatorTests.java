@@ -1,51 +1,55 @@
 package com.it_academy.calculator;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.platform.suite.api.SelectClasses;
-import org.junit.platform.suite.api.Suite;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import static org.assertj.core.api.Assertions.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-@Suite
-@SelectClasses(ConsoleInputConverterTest.class)
-public class CalculatorTest {
+public class CalculatorTests {
 
     @ParameterizedTest
-    @Tag("Залупа")
     @CsvSource(value = {"5, 10, 15", "-5, 10, 5", "5, -10, -5", "-5, -10, -15", "0, 0, 0"})
     public void testAddingfunction(int first, int second, int result){
-        assertEquals(result, Calculator.calculate(first, second, '+'), "Неправильно считает сумму");
+        assertEquals(result, Calculator.plus(first, second), "Wrong plus operation result");
     }
 
     @ParameterizedTest
     @CsvSource(value = {"5, 10, -5", "-5, 10, -15", "5, -10, 15", "-5, -10, 5", "0, 0, 0"})
     public void testMinusfunction(int first, int second, int result){
-        assertEquals(result, Calculator.calculate(first, second, '-'), "Неправильно считает разницу");
+        assertEquals(result, Calculator.minus(first, second), "Wrong minus operation result");
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 2", "-1, 2, -2", "1, -2, -2", "-1, -2, 2", "0, 0, 0"})
     public void testMultiplyfunction(int first, int second, int result){
-        assertEquals(result, Calculator.calculate(first, second, '*'), "Неправильно считает произведение");
+        assertEquals(result, Calculator.multiply(first, second), "Wrong multiply result");
     }
 
     @ParameterizedTest
     @CsvSource(value = {"2, 1, 2", "-2, 1, -2", "2, -1, -2", "-2, -1, 2", "0, 2, 0"})
     public void testDividingfunction(int first, int second, int result){
-        assertEquals(result, Calculator.calculate(first, second, '/'), "Неправильно считает частное");
+        assertEquals(result, Calculator.divide(first, second), "Wrong division result");
     }
 
     @Test
     public void divideByZero(){
         Exception exception = assertThrows(ArithmeticException.class,
                 () -> Calculator.calculate(15, 0, '/'));
-        assertEquals("Нельзя делить на ноль :)", exception.getMessage());
+        assertEquals("You can't divide by zero", exception.getMessage());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"5, 2, +, 7", "5, 2, -, 3", "5, 2, *, 10", "6, 3, /, 2"})
+    public void signSelectionTest(int first, int second, char sign, int result){
+        assertEquals(result, Calculator.calculate(first, second, sign), "Incorrect sign selection");
+    }
+
+    @Test
+    public void wrongSignTest(){
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> Calculator.calculate(15, 15,'o'));
+        assertEquals("Wrong sign", exception.getMessage());
     }
 
 //    @ParameterizedTest

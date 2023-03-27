@@ -4,21 +4,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ConsoleInputConverterTest {
+public class ConsoleInputConverterTests {
 
     @Test
     public void checkUserNumberInput() {
         String input = "15";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        assertEquals("15", ConsoleInputConverter.getInput(), "Не работает input");
+        assertEquals("15", ConsoleInputConverter.getInput(), "Input is not working");
     }
 
     @Test
@@ -33,12 +32,12 @@ public class ConsoleInputConverterTest {
     }
 
     @ParameterizedTest
-    //@NullAndEmptySource
+    @EmptySource
     @CsvSource (value = "This is text")
     public void checkInputToDoubleConversionExeptions(String input){
         Exception exception = assertThrows(NumberFormatException.class,
                 () -> ConsoleInputConverter.convertInputToDouble(input));
-        assertEquals("Не было введено число, попробуйте ещё раз", exception.getMessage());
+        assertEquals("It's not a number, try again", exception.getMessage());
     }
 
     @ParameterizedTest

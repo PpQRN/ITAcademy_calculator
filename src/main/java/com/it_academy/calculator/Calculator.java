@@ -15,7 +15,7 @@ public class Calculator {
 
     public static double divide(double number1, double number2) {
         if (number2 == 0) {
-            throw new ArithmeticException("Нельзя делить на ноль :)");
+            throw new ArithmeticException("You can't divide by zero");
         }
         return number1 / number2;
     }
@@ -31,7 +31,7 @@ public class Calculator {
             case '-' -> result = minus(number1, number2);
             case '/' -> result = divide(number1, number2);
             case '*' -> result = multiply(number1, number2);
-            default -> throw new IllegalArgumentException("Вы ввели неверный знак");
+            default -> throw new IllegalArgumentException("Wrong sign");
         }
         return result;
     }

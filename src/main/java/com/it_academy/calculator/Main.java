@@ -1,31 +1,30 @@
 package com.it_academy.calculator;
 
-
 public class Main {
 
     public static void main(String[] args) {
         Double number1 = null;
         Double number2 = null;
         Character sign = null;
-        System.out.println("Введите первое число");
+        System.out.println("Enter first number");
         while (number1 == null) {
             try {
                 String input = ConsoleInputConverter.getInput();
                 number1 = ConsoleInputConverter.convertInputToDouble(input);
             } catch (NumberFormatException exception) {
-                System.out.println("Не было введено число, попробуйте ещё раз");
+                System.out.println(exception.getMessage());
             }
         }
-        System.out.println("Введите второе число");
+        System.out.println("Enter second number");
         while (number2 == null) {
             try {
                 String input = ConsoleInputConverter.getInput();
                 number2 = ConsoleInputConverter.convertInputToDouble(input);
             } catch (NumberFormatException exception) {
-                System.out.println("Не было введено число, попробуйте ещё раз");
+                System.out.println(exception.getMessage());
             }
         }
-        System.out.println("Введите действие, которое хотите совершить (доступные действия +,-,/,*)");
+        System.out.println("Enter the operation you want to perform (available operation +,-,/,*)");
         while (sign == null) {
             try {
                 String input = ConsoleInputConverter.getInput();
