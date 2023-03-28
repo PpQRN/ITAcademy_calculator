@@ -7,13 +7,14 @@ import org.junit.jupiter.params.provider.EmptySource;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ConsoleInputConverterTests {
 
     @Test
-    public void checkUserNumberInput() {
+    public void testUserNumberInput() {
         String input = "15";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -21,20 +22,20 @@ public class ConsoleInputConverterTests {
     }
 
     @Test
-    public void checkInputToDoubleConvertion(){
+    public void testInputToDoubleConversion() {
         assertEquals(15, ConsoleInputConverter.convertInputToDouble("15"));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"+, +", "-, -", "/, /", "*, *"})
-    public void checkInputToCharConversion(char sign1, String sign2){
+    public void testInputToCharConversion(char sign1, String sign2) {
         assertEquals(sign1, ConsoleInputConverter.convertInputToChar(sign2));
     }
 
     @ParameterizedTest
     @EmptySource
-    @CsvSource (value = "This is text")
-    public void checkInputToDoubleConversionExeptions(String input){
+    @CsvSource(value = "This is text")
+    public void testInputToDoubleConversionExceptions(String input) {
         Exception exception = assertThrows(NumberFormatException.class,
                 () -> ConsoleInputConverter.convertInputToDouble(input));
         assertEquals("It's not a number, try again", exception.getMessage());
@@ -42,11 +43,16 @@ public class ConsoleInputConverterTests {
 
     @ParameterizedTest
     @EmptySource
-    @CsvSource (value = "15")
-    public void checkInputToCharConversionExeptions(String input){
+    @CsvSource(value = "15")
+    public void testInputToCharConversionExceptions(String input) {
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> ConsoleInputConverter.convertInputToChar(input));
         assertEquals("Wrong input, try again", exception.getMessage());
     }
 
+    @Test
+    public void testponoasa() {
+        assertThrows(NumberFormatException.class, () -> ConsoleInputConverter.convertInputToDouble("Jopa"));
+
+    }
 }

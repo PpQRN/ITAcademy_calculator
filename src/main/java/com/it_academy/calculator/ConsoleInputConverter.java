@@ -11,11 +11,11 @@ public class ConsoleInputConverter {
     }
 
     public static double convertInputToDouble(String input) {
-        try {
+//        try {
             return Double.parseDouble(input);
-        } catch (NumberFormatException exception){
-            throw new NumberFormatException("It's not a number, try again");
-        }
+//        } catch (NumberFormatException exception){
+//            throw new NumberFormatException("It's not a number, try again");
+//        }
     }
 
 
