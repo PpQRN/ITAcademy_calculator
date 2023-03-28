@@ -34,15 +34,6 @@ public class ConsoleInputConverterTests {
 
     @ParameterizedTest
     @EmptySource
-    @CsvSource(value = "This is text")
-    public void testInputToDoubleConversionExceptions(String input) {
-        Exception exception = assertThrows(NumberFormatException.class,
-                () -> ConsoleInputConverter.convertInputToDouble(input));
-        assertEquals("It's not a number, try again", exception.getMessage());
-    }
-
-    @ParameterizedTest
-    @EmptySource
     @CsvSource(value = "15")
     public void testInputToCharConversionExceptions(String input) {
         Exception exception = assertThrows(IllegalArgumentException.class,
@@ -51,8 +42,23 @@ public class ConsoleInputConverterTests {
     }
 
     @Test
-    public void testponoasa() {
-        assertThrows(NumberFormatException.class, () -> ConsoleInputConverter.convertInputToDouble("Jopa"));
+    public void testConvertInputToDouble_PositiveNumber() {
+        String input = "42";
+        double expectedOutput = 42.0;
+        double actualOutput = ConsoleInputConverter.convertInputToDouble(input);
+        assertEquals(expectedOutput, actualOutput);
+    }
 
+    @Test
+    public void testConvertInputToDouble_NegativeNumber() {
+        String input = "-5.5";
+        double expectedOutput = -5.5;
+        double actualOutput = ConsoleInputConverter.convertInputToDouble(input);
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void testConvertInputToDouble_InvalidInput() {
+        assertThrows(NumberFormatException.class, () -> ConsoleInputConverter.convertInputToDouble("Text"));
     }
 }

@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculatorTests {
@@ -52,13 +55,11 @@ public class CalculatorTests {
         assertEquals("Wrong sign", exception.getMessage());
     }
 
-//    @ParameterizedTest
-//    @CsvSource(value =  {"1", "-5"})
-//    public void checkUserNumberInput(double number){
-//        String input = Double.toString(number);
-//        InputStream in = new ByteArrayInputStream(input.getBytes());
-//        System.setIn(in);
-//        assertEquals(number, Calculator.userNumberInput());
-//    }
-
+    @ParameterizedTest
+    @CsvSource(value = {"1"})
+    public void testponosa(String text){
+        InputStream in = new ByteArrayInputStream(text.getBytes());
+        System.setIn(in);
+        assertEquals(1, Main.getUserInput());
+    }
 }

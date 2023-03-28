@@ -11,11 +11,7 @@ public class ConsoleInputConverter {
     }
 
     public static double convertInputToDouble(String input) {
-//        try {
-            return Double.parseDouble(input);
-//        } catch (NumberFormatException exception){
-//            throw new NumberFormatException("It's not a number, try again");
-//        }
+        return Double.parseDouble(input);
     }
 
 
@@ -25,16 +21,4 @@ public class ConsoleInputConverter {
         }
         return input.charAt(0);
     }
-
-//    public static double inputDouble(){
-//        Double number = null;
-//        while (number == null) {
-//            try {
-//                String input = getInput();
-//                number = convertInputToDouble(input);
-//            } catch (NumberFormatException exception) {
-//                System.out.println("Не было введено число, попробуйте ещё раз");
-//            }
-//        }
-//    }
 }
